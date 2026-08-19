@@ -16,7 +16,7 @@ class NoProcessamentoAgente(Agent):
         self.indice_saude = (self.capacidade_total - self.carga_atual) / self.capacidade_total
 
     def buscar_vizinhos(self):
-        # Garante vizinhança ordenada para evitar desvios aleatórios de ponteiro
+
         vizinhos = [agente for agente in self.model.agents if agente.unique_id != self.unique_id]
         return sorted(vizinhos, key=lambda a: a.unique_id)
 

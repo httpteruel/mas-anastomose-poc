@@ -29,7 +29,7 @@ def analisar_resultados():
 
     sns.set_theme(style="whitegrid")
     
-    # --- GRÁFICO 1: Histograma de Distribuição da Redução (%) ---
+    # --- GRÁFICO 1: Histograma ---
     plt.figure(figsize=(10, 6))
     sns.histplot(df['Reducao_Percentual'], bins=50, kde=True, color='forestgreen')
     plt.axvline(media_reducao, color='red', linestyle='--', linewidth=2, label=f'Média ({media_reducao:.2f}%)')
@@ -42,7 +42,7 @@ def analisar_resultados():
     plt.close()
     print("-> Gráfico 'distribuicao_eficiencia.png' gerado com sucesso!")
 
-    # --- GRÁFICO 2: Comparativo Boxplot (cenário A vs cenário B) ---
+    # --- GRÁFICO 2: Boxplot ---
     df_melted = pd.melt(df, value_vars=['Perdas_Rigido', 'Perdas_Bio_Inspirado'], 
                         var_name='Arquitetura', value_name='Perdas')
     df_melted['Arquitetura'] = df_melted['Arquitetura'].map({

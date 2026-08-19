@@ -83,12 +83,12 @@ python -m venv .venv
 
 # 4. Atualização do gerenciador de pacotes e instalação das dependências
 pip install --upgrade pip
-pip install mesa pandas matplotlib seaborn
+pip install mesa pandas matplotlib seaborn networkx
 
 # 5. Execução da Implementação Inicial
 python main.py
 
-# 6. Execução da Simulação de Estatísticas Massivas (100.000 Seeds)
+# 6. Execução da Simulação Atual
 python batch_run.py
 
 # 7. Geração de Análise de Dados e Gráficos 
