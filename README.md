@@ -75,8 +75,11 @@ Abra o terminal na pasta raiz do projeto e execute os comandos abaixo para prepa
 # 1. Liberar a Execução de Scripts no PowerShell
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
 
+
 # 2. Criação do ambiente virtual
+Remove-Item -Recurse -Force .venv
 python -m venv .venv
+.venv\Scripts\Activate.ps1
 
 # 3. Ativação do ambiente virtual
 .venv\Scripts\Activate.ps1
