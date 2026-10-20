@@ -29,20 +29,22 @@ def analisar_resultados():
 
     sns.set_theme(style="whitegrid")
     
-    # --- GRÁFICO 1: Histograma ---
-    plt.figure(figsize=(10, 6))
+    # --- GRÁFICO 1: Histograma (Aumentado para 12x7 polegadas) ---
+    plt.figure(figsize=(12, 7))
     sns.histplot(df['Reducao_Percentual'], bins=50, kde=True, color='forestgreen')
     plt.axvline(media_reducao, color='red', linestyle='--', linewidth=2, label=f'Média ({media_reducao:.2f}%)')
-    plt.title('Distribuição da Eficiência do Algoritmo Bio-Inspirado\n(100.000 Sementes Simuladas)', fontsize=14, pad=15)
-    plt.xlabel('Redução das Perdas de Carga (%)', fontsize=12)
-    plt.ylabel('Frequência (Número de Sementes)', fontsize=12)
-    plt.legend()
+    plt.title('Distribuição da Eficiência do Algoritmo Bio-Inspirado\n(100.000 Sementes Simuladas)', fontsize=16, pad=15)
+    plt.xlabel('Redução das Perdas de Carga (%)', fontsize=14)
+    plt.ylabel('Frequência (Número de Sementes)', fontsize=14)
+    plt.xticks(fontsize=12)
+    plt.yticks(fontsize=12)
+    plt.legend(fontsize=12)
     plt.tight_layout()
-    plt.savefig('distribuicao_eficiencia.png', dpi=300)
+    plt.savefig('distribuicao_eficiencia.png', dpi=300, bbox_inches='tight')
     plt.close()
-    print("-> Gráfico 'distribuicao_eficiencia.png' gerado com sucesso!")
+    print("-> Gráfico 'distribuicao_eficiencia.png' gerado com sucesso (Tamanho ampliado)!")
 
-    # --- GRÁFICO 2: Boxplot ---
+    # --- GRÁFICO 2: Boxplot (Aumentado para 12x7 polegadas) ---
     df_melted = pd.melt(df, value_vars=['Perdas_Rigido', 'Perdas_Bio_Inspirado'], 
                         var_name='Arquitetura', value_name='Perdas')
     df_melted['Arquitetura'] = df_melted['Arquitetura'].map({
@@ -50,15 +52,19 @@ def analisar_resultados():
         'Perdas_Bio_Inspirado': 'Bio-Inspirada'
     })
 
-    plt.figure(figsize=(10, 6))
-    sns.boxplot(x='Arquitetura', y='Perdas', data=df_melted, palette=['#cf142b', '#228b22'])
-    plt.title('Comparativo de Dispersão de Perdas Totais por Arquitetura', fontsize=14, pad=15)
-    plt.xlabel('Tipo de Arquitetura de Rede', fontsize=12)
-    plt.ylabel('Volume de Cargas Perdidas (u.c.)', fontsize=12)
+    plt.figure(figsize=(12, 7))
+
+    sns.boxplot(x='Arquitetura', y='Perdas', hue='Arquitetura', data=df_melted, 
+                palette=['#cf142b', '#228b22'], legend=False, width=0.4)
+    plt.title('Comparativo de Dispersão de Perdas Totais por Arquitetura', fontsize=16, pad=15)
+    plt.xlabel('Tipo de Arquitetura de Rede', fontsize=14)
+    plt.ylabel('Volume de Cargas Perdidas (u.c.)', fontsize=14)
+    plt.xticks(fontsize=12)
+    plt.yticks(fontsize=11)
     plt.tight_layout()
-    plt.savefig('comparativo_boxplot.png', dpi=300)
+    plt.savefig('comparativo_boxplot.png', dpi=300, bbox_inches='tight')
     plt.close()
-    print("-> Gráfico 'comparativo_boxplot.png' gerado com sucesso!")
+    print("-> Gráfico 'comparativo_boxplot.png' gerado com sucesso (Tamanho ampliado)!")
     print("=====================================================================")
 
 if __name__ == "__main__":

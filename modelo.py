@@ -13,7 +13,15 @@ class MalhaComputacionalModel(Model):
         id_no = 0
         for x in range(2):
             for y in range(2):
-                no = NoProcessamentoAgente(id_no, self, capacidade_total=100)
+                no = NoProcessamentoAgente(
+                    identificador_unico=id_no, 
+                    modelo=self, 
+                    capacidade_total=100,
+                    cap_canal=50.0,      # Padronizado para 50.0 u.c. conforme o artigo
+                    latencia_media=1,    # Latência Poisson/Exponencial de 1 ciclo
+                    prob_perda=0.02,     # 2% de probabilidade de falha no enlace
+                    timeout=2            # Janela de timeout
+                )
                 self.grid.place_agent(no, (x, y))
                 self.agents.add(no)
                 id_no += 1
@@ -23,11 +31,13 @@ class MalhaComputacionalModel(Model):
 
     def step(self):
         self.ciclo_atual += 1
-        
         agentes_ordenados = sorted(list(self.agents), key=lambda a: a.unique_id)
         
+        # Injeção estocástica de carga externa [0, 160] u.c.
         for agente in agentes_ordenados:
-            agente.carga_atual = random.randint(0, 160)
+            carga_injetada = random.randint(0, 160)
+            
+            agente.carga_atual = min(150.0, agente.carga_atual + carga_injetada)
             
         for agente in agentes_ordenados:
             agente.step()
